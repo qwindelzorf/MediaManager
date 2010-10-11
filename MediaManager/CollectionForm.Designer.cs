@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Books");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Games");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Music");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Video");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Books");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Games");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Music");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Video");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.objectListView = new BrightIdeasSoftware.ObjectListView();
+            this.btnDel = new System.Windows.Forms.Button();
+            this.btnAddVideo = new System.Windows.Forms.Button();
+            this.btnAddMusic = new System.Windows.Forms.Button();
+            this.btnAddGame = new System.Windows.Forms.Button();
+            this.btnAddBook = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageItems = new System.Windows.Forms.TabPage();
             this.tabLoans = new System.Windows.Forms.TabPage();
@@ -47,9 +51,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
+            this.objectListView = new BrightIdeasSoftware.ObjectListView();
             this.colTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnDel = new System.Windows.Forms.Button();
             this.colSubtitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colPubDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colGenre = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -59,10 +62,10 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             this.tabPageProperties.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -78,7 +81,10 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnDel);
-            this.splitContainer1.Panel2.Controls.Add(this.btnAdd);
+            this.splitContainer1.Panel2.Controls.Add(this.btnAddVideo);
+            this.splitContainer1.Panel2.Controls.Add(this.btnAddMusic);
+            this.splitContainer1.Panel2.Controls.Add(this.btnAddGame);
+            this.splitContainer1.Panel2.Controls.Add(this.btnAddBook);
             this.splitContainer1.Panel2.Controls.Add(this.objectListView);
             this.splitContainer1.Size = new System.Drawing.Size(714, 299);
             this.splitContainer1.SplitterDistance = 148;
@@ -89,53 +95,77 @@
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
-            treeNode5.Name = "books";
-            treeNode5.Text = "Books";
-            treeNode6.Name = "games";
-            treeNode6.Text = "Games";
-            treeNode7.Name = "music";
-            treeNode7.Text = "Music";
-            treeNode8.Name = "video";
-            treeNode8.Text = "Video";
+            treeNode1.Name = "books";
+            treeNode1.Text = "Books";
+            treeNode2.Name = "games";
+            treeNode2.Text = "Games";
+            treeNode3.Name = "music";
+            treeNode3.Text = "Music";
+            treeNode4.Name = "video";
+            treeNode4.Text = "Video";
             this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.treeView.Size = new System.Drawing.Size(148, 299);
             this.treeView.TabIndex = 0;
             this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
-            // objectListView
+            // btnDel
             // 
-            this.objectListView.AllColumns.Add(this.colTitle);
-            this.objectListView.AllColumns.Add(this.colSubtitle);
-            this.objectListView.AllColumns.Add(this.colPubDate);
-            this.objectListView.AllColumns.Add(this.colGenre);
-            this.objectListView.AllColumns.Add(this.colSeries);
-            this.objectListView.AllColumns.Add(this.colSeriesNumber);
-            this.objectListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
-            this.objectListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colTitle,
-            this.colSubtitle,
-            this.colPubDate,
-            this.colGenre,
-            this.colSeries,
-            this.colSeriesNumber});
-            this.objectListView.EmptyListMsg = "There are no items in this view.";
-            this.objectListView.FullRowSelect = true;
-            this.objectListView.GridLines = true;
-            this.objectListView.HasCollapsibleGroups = false;
-            this.objectListView.Location = new System.Drawing.Point(0, 0);
-            this.objectListView.Name = "objectListView";
-            this.objectListView.Size = new System.Drawing.Size(562, 263);
-            this.objectListView.TabIndex = 0;
-            this.objectListView.TintSortColumn = true;
-            this.objectListView.UseCompatibleStateImageBehavior = false;
-            this.objectListView.View = System.Windows.Forms.View.Details;
+            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDel.Location = new System.Drawing.Point(482, 269);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(75, 23);
+            this.btnDel.TabIndex = 2;
+            this.btnDel.Text = "Delete";
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
+            // btnAddVideo
+            // 
+            this.btnAddVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddVideo.Location = new System.Drawing.Point(246, 269);
+            this.btnAddVideo.Name = "btnAddVideo";
+            this.btnAddVideo.Size = new System.Drawing.Size(75, 23);
+            this.btnAddVideo.TabIndex = 1;
+            this.btnAddVideo.Text = "Add Video";
+            this.btnAddVideo.UseVisualStyleBackColor = true;
+            this.btnAddVideo.Click += new System.EventHandler(this.btnAddVideo_Click);
+            // 
+            // btnAddMusic
+            // 
+            this.btnAddMusic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddMusic.Location = new System.Drawing.Point(165, 269);
+            this.btnAddMusic.Name = "btnAddMusic";
+            this.btnAddMusic.Size = new System.Drawing.Size(75, 23);
+            this.btnAddMusic.TabIndex = 1;
+            this.btnAddMusic.Text = "Add Music";
+            this.btnAddMusic.UseVisualStyleBackColor = true;
+            this.btnAddMusic.Click += new System.EventHandler(this.btnAddMusic_Click);
+            // 
+            // btnAddGame
+            // 
+            this.btnAddGame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddGame.Location = new System.Drawing.Point(84, 269);
+            this.btnAddGame.Name = "btnAddGame";
+            this.btnAddGame.Size = new System.Drawing.Size(75, 23);
+            this.btnAddGame.TabIndex = 1;
+            this.btnAddGame.Text = "Add Game";
+            this.btnAddGame.UseVisualStyleBackColor = true;
+            this.btnAddGame.Click += new System.EventHandler(this.btnAddGame_Click);
+            // 
+            // btnAddBook
+            // 
+            this.btnAddBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddBook.Location = new System.Drawing.Point(3, 269);
+            this.btnAddBook.Name = "btnAddBook";
+            this.btnAddBook.Size = new System.Drawing.Size(75, 23);
+            this.btnAddBook.TabIndex = 1;
+            this.btnAddBook.Text = "Add Book";
+            this.btnAddBook.UseVisualStyleBackColor = true;
+            this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
             // tabControl1
             // 
@@ -165,7 +195,7 @@
             this.tabLoans.Location = new System.Drawing.Point(4, 22);
             this.tabLoans.Name = "tabLoans";
             this.tabLoans.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLoans.Size = new System.Drawing.Size(497, 286);
+            this.tabLoans.Size = new System.Drawing.Size(720, 305);
             this.tabLoans.TabIndex = 2;
             this.tabLoans.Text = "Loans";
             this.tabLoans.UseVisualStyleBackColor = true;
@@ -183,7 +213,7 @@
             this.tabPageProperties.Location = new System.Drawing.Point(4, 22);
             this.tabPageProperties.Name = "tabPageProperties";
             this.tabPageProperties.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProperties.Size = new System.Drawing.Size(497, 286);
+            this.tabPageProperties.Size = new System.Drawing.Size(720, 305);
             this.tabPageProperties.TabIndex = 1;
             this.tabPageProperties.Text = "Collection Properties";
             this.tabPageProperties.UseVisualStyleBackColor = true;
@@ -267,32 +297,42 @@
             this.txtTitle.TabIndex = 0;
             this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
+            // objectListView
+            // 
+            this.objectListView.AllColumns.Add(this.colTitle);
+            this.objectListView.AllColumns.Add(this.colSubtitle);
+            this.objectListView.AllColumns.Add(this.colPubDate);
+            this.objectListView.AllColumns.Add(this.colGenre);
+            this.objectListView.AllColumns.Add(this.colSeries);
+            this.objectListView.AllColumns.Add(this.colSeriesNumber);
+            this.objectListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.objectListView.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
+            this.objectListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colTitle,
+            this.colSubtitle,
+            this.colPubDate,
+            this.colGenre,
+            this.colSeries,
+            this.colSeriesNumber});
+            this.objectListView.EmptyListMsg = "There are no items in this view.";
+            this.objectListView.FullRowSelect = true;
+            this.objectListView.GridLines = true;
+            this.objectListView.HasCollapsibleGroups = false;
+            this.objectListView.Location = new System.Drawing.Point(0, 0);
+            this.objectListView.Name = "objectListView";
+            this.objectListView.Size = new System.Drawing.Size(562, 263);
+            this.objectListView.TabIndex = 0;
+            this.objectListView.TintSortColumn = true;
+            this.objectListView.UseCompatibleStateImageBehavior = false;
+            this.objectListView.View = System.Windows.Forms.View.Details;
+            // 
             // colTitle
             // 
             this.colTitle.AspectName = "Title";
             this.colTitle.Text = "Title";
             this.colTitle.Width = 100;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAdd.Location = new System.Drawing.Point(3, 269);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnDel
-            // 
-            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDel.Location = new System.Drawing.Point(84, 269);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(75, 23);
-            this.btnDel.TabIndex = 2;
-            this.btnDel.Text = "Delete";
-            this.btnDel.UseVisualStyleBackColor = true;
             // 
             // colSubtitle
             // 
@@ -335,11 +375,11 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPageItems.ResumeLayout(false);
             this.tabPageProperties.ResumeLayout(false);
             this.tabPageProperties.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -362,12 +402,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TabPage tabLoans;
         private BrightIdeasSoftware.OLVColumn colTitle;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnAddBook;
         private System.Windows.Forms.Button btnDel;
         private BrightIdeasSoftware.OLVColumn colSubtitle;
         private BrightIdeasSoftware.OLVColumn colPubDate;
         private BrightIdeasSoftware.OLVColumn colGenre;
         private BrightIdeasSoftware.OLVColumn colSeries;
         private BrightIdeasSoftware.OLVColumn colSeriesNumber;
+        private System.Windows.Forms.Button btnAddVideo;
+        private System.Windows.Forms.Button btnAddMusic;
+        private System.Windows.Forms.Button btnAddGame;
     }
 }

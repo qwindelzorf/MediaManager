@@ -99,11 +99,41 @@ namespace MediaManager
             collection.Comments = txtComments.Text;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddBook_Click(object sender, EventArgs e)
         {
-            Book b = new Book();
-            b.Title = "*";
-            collection.Add(b);
+            Media m = new Book();
+            m.Title = "*";
+            collection.Add(m);
         }
+
+        private void btnAddGame_Click(object sender, EventArgs e)
+        {
+            Media m = new Game();
+            m.Title = "*";
+            collection.Add(m);
+        }
+
+        private void btnAddMusic_Click(object sender, EventArgs e)
+        {
+            Media m = new Music();
+            m.Title = "*";
+            collection.Add(m);
+        }
+
+        private void btnAddVideo_Click(object sender, EventArgs e)
+        {
+            Media m = new Video();
+            m.Title = "*";
+            collection.Add(m);
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            // Delete the active row from the collection
+            Media m = (Media)objectListView.SelectedObject;
+            collection.Remove(m);
+        }
+
+
     }
 }
