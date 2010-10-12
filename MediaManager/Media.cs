@@ -12,19 +12,19 @@ namespace MediaManager
     {
         public string Title;
         public string Subtitle;
-        public DateTime? PublicationDate;
+        public DateTime PublicationDate;
         public List<string> Genre;
         public string Series;
-        public uint? SeriesNumber;
+        public uint SeriesNumber;
 
         public Media()
         {
             Title = string.Empty;
             Subtitle = string.Empty;
-            PublicationDate = null;
+            PublicationDate = DateTime.MinValue;
             Genre = new List<string>();
             Series = string.Empty;
-            SeriesNumber = null;
+            SeriesNumber = 0;
         }
     }
 }

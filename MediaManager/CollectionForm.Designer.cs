@@ -28,20 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Books");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Games");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Music");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Video");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView = new System.Windows.Forms.TreeView();
+            this.treeViewItems = new System.Windows.Forms.TreeView();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnAddVideo = new System.Windows.Forms.Button();
             this.btnAddMusic = new System.Windows.Forms.Button();
             this.btnAddGame = new System.Windows.Forms.Button();
             this.btnAddBook = new System.Windows.Forms.Button();
+            this.listContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.musicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageItems = new System.Windows.Forms.TabPage();
-            this.tabLoans = new System.Windows.Forms.TabPage();
             this.tabPageProperties = new System.Windows.Forms.TabPage();
             this.lblModified = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,7 +60,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
-            this.objectListView = new BrightIdeasSoftware.ObjectListView();
+            this.objectListViewItems = new BrightIdeasSoftware.ObjectListView();
             this.colTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colSubtitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colPubDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -62,10 +71,11 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.listContextMenu.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageItems.SuspendLayout();
             this.tabPageProperties.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListViewItems)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -76,7 +86,8 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.treeView);
+            this.splitContainer1.Panel1.Controls.Add(this.treeViewItems);
+            this.splitContainer1.Panel1MinSize = 125;
             // 
             // splitContainer1.Panel2
             // 
@@ -85,16 +96,16 @@
             this.splitContainer1.Panel2.Controls.Add(this.btnAddMusic);
             this.splitContainer1.Panel2.Controls.Add(this.btnAddGame);
             this.splitContainer1.Panel2.Controls.Add(this.btnAddBook);
-            this.splitContainer1.Panel2.Controls.Add(this.objectListView);
-            this.splitContainer1.Size = new System.Drawing.Size(714, 299);
-            this.splitContainer1.SplitterDistance = 148;
+            this.splitContainer1.Panel2.Controls.Add(this.objectListViewItems);
+            this.splitContainer1.Size = new System.Drawing.Size(570, 230);
+            this.splitContainer1.SplitterDistance = 125;
             this.splitContainer1.TabIndex = 0;
             // 
-            // treeView
+            // treeViewItems
             // 
-            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView.Location = new System.Drawing.Point(0, 0);
-            this.treeView.Name = "treeView";
+            this.treeViewItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewItems.Location = new System.Drawing.Point(0, 0);
+            this.treeViewItems.Name = "treeViewItems";
             treeNode1.Name = "books";
             treeNode1.Text = "Books";
             treeNode2.Name = "games";
@@ -103,19 +114,19 @@
             treeNode3.Text = "Music";
             treeNode4.Name = "video";
             treeNode4.Text = "Video";
-            this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.treeViewItems.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2,
             treeNode3,
             treeNode4});
-            this.treeView.Size = new System.Drawing.Size(148, 299);
-            this.treeView.TabIndex = 0;
-            this.treeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
+            this.treeViewItems.Size = new System.Drawing.Size(125, 230);
+            this.treeViewItems.TabIndex = 0;
+            this.treeViewItems.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_AfterSelect);
             // 
             // btnDel
             // 
             this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDel.Location = new System.Drawing.Point(482, 269);
+            this.btnDel.Location = new System.Drawing.Point(361, 200);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(75, 23);
             this.btnDel.TabIndex = 2;
@@ -126,7 +137,7 @@
             // btnAddVideo
             // 
             this.btnAddVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddVideo.Location = new System.Drawing.Point(246, 269);
+            this.btnAddVideo.Location = new System.Drawing.Point(246, 200);
             this.btnAddVideo.Name = "btnAddVideo";
             this.btnAddVideo.Size = new System.Drawing.Size(75, 23);
             this.btnAddVideo.TabIndex = 1;
@@ -137,7 +148,7 @@
             // btnAddMusic
             // 
             this.btnAddMusic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddMusic.Location = new System.Drawing.Point(165, 269);
+            this.btnAddMusic.Location = new System.Drawing.Point(165, 200);
             this.btnAddMusic.Name = "btnAddMusic";
             this.btnAddMusic.Size = new System.Drawing.Size(75, 23);
             this.btnAddMusic.TabIndex = 1;
@@ -148,7 +159,7 @@
             // btnAddGame
             // 
             this.btnAddGame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddGame.Location = new System.Drawing.Point(84, 269);
+            this.btnAddGame.Location = new System.Drawing.Point(84, 200);
             this.btnAddGame.Name = "btnAddGame";
             this.btnAddGame.Size = new System.Drawing.Size(75, 23);
             this.btnAddGame.TabIndex = 1;
@@ -159,7 +170,7 @@
             // btnAddBook
             // 
             this.btnAddBook.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddBook.Location = new System.Drawing.Point(3, 269);
+            this.btnAddBook.Location = new System.Drawing.Point(3, 200);
             this.btnAddBook.Name = "btnAddBook";
             this.btnAddBook.Size = new System.Drawing.Size(75, 23);
             this.btnAddBook.TabIndex = 1;
@@ -167,16 +178,84 @@
             this.btnAddBook.UseVisualStyleBackColor = true;
             this.btnAddBook.Click += new System.EventHandler(this.btnAddBook_Click);
             // 
+            // listContextMenu
+            // 
+            this.listContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.deleteToolStripMenuItem,
+            this.loanToolStripMenuItem});
+            this.listContextMenu.Name = "listContextMenu";
+            this.listContextMenu.Size = new System.Drawing.Size(132, 76);
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bookToolStripMenuItem,
+            this.gameToolStripMenuItem,
+            this.musicToolStripMenuItem,
+            this.videoToolStripMenuItem});
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.newToolStripMenuItem.Text = "&New";
+            // 
+            // bookToolStripMenuItem
+            // 
+            this.bookToolStripMenuItem.Name = "bookToolStripMenuItem";
+            this.bookToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.bookToolStripMenuItem.Text = "&Book";
+            this.bookToolStripMenuItem.Click += new System.EventHandler(this.bookToolStripMenuItem_Click);
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.gameToolStripMenuItem.Text = "&Game";
+            this.gameToolStripMenuItem.Click += new System.EventHandler(this.gameToolStripMenuItem_Click);
+            // 
+            // musicToolStripMenuItem
+            // 
+            this.musicToolStripMenuItem.Name = "musicToolStripMenuItem";
+            this.musicToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.musicToolStripMenuItem.Text = "&Music";
+            this.musicToolStripMenuItem.Click += new System.EventHandler(this.musicToolStripMenuItem_Click);
+            // 
+            // videoToolStripMenuItem
+            // 
+            this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.videoToolStripMenuItem.Text = "&Video";
+            this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(128, 6);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.deleteToolStripMenuItem.Text = "&Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // loanToolStripMenuItem
+            // 
+            this.loanToolStripMenuItem.Enabled = false;
+            this.loanToolStripMenuItem.Name = "loanToolStripMenuItem";
+            this.loanToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.loanToolStripMenuItem.Text = "&Loan";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageItems);
-            this.tabControl1.Controls.Add(this.tabLoans);
             this.tabControl1.Controls.Add(this.tabPageProperties);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(728, 331);
+            this.tabControl1.Size = new System.Drawing.Size(584, 262);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPageItems
@@ -185,20 +264,10 @@
             this.tabPageItems.Location = new System.Drawing.Point(4, 22);
             this.tabPageItems.Name = "tabPageItems";
             this.tabPageItems.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageItems.Size = new System.Drawing.Size(720, 305);
+            this.tabPageItems.Size = new System.Drawing.Size(576, 236);
             this.tabPageItems.TabIndex = 0;
             this.tabPageItems.Text = "Items";
             this.tabPageItems.UseVisualStyleBackColor = true;
-            // 
-            // tabLoans
-            // 
-            this.tabLoans.Location = new System.Drawing.Point(4, 22);
-            this.tabLoans.Name = "tabLoans";
-            this.tabLoans.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLoans.Size = new System.Drawing.Size(720, 305);
-            this.tabLoans.TabIndex = 2;
-            this.tabLoans.Text = "Loans";
-            this.tabLoans.UseVisualStyleBackColor = true;
             // 
             // tabPageProperties
             // 
@@ -213,7 +282,7 @@
             this.tabPageProperties.Location = new System.Drawing.Point(4, 22);
             this.tabPageProperties.Name = "tabPageProperties";
             this.tabPageProperties.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProperties.Size = new System.Drawing.Size(720, 305);
+            this.tabPageProperties.Size = new System.Drawing.Size(576, 236);
             this.tabPageProperties.TabIndex = 1;
             this.tabPageProperties.Text = "Collection Properties";
             this.tabPageProperties.UseVisualStyleBackColor = true;
@@ -223,9 +292,9 @@
             this.lblModified.AutoSize = true;
             this.lblModified.Location = new System.Drawing.Point(298, 44);
             this.lblModified.Name = "lblModified";
-            this.lblModified.Size = new System.Drawing.Size(65, 13);
+            this.lblModified.Size = new System.Drawing.Size(114, 13);
             this.lblModified.TabIndex = 7;
-            this.lblModified.Text = "00/00/0000";
+            this.lblModified.Text = "00/00/0000 00:00 AM";
             // 
             // label5
             // 
@@ -243,7 +312,7 @@
             this.lblCreated.Name = "lblCreated";
             this.lblCreated.Size = new System.Drawing.Size(114, 13);
             this.lblCreated.TabIndex = 5;
-            this.lblCreated.Text = "00/00/0000 12:12 PM";
+            this.lblCreated.Text = "00/00/0000 00:00 AM";
             // 
             // label3
             // 
@@ -265,7 +334,7 @@
             this.txtComments.Multiline = true;
             this.txtComments.Name = "txtComments";
             this.txtComments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComments.Size = new System.Drawing.Size(478, 192);
+            this.txtComments.Size = new System.Drawing.Size(557, 123);
             this.txtComments.TabIndex = 3;
             this.txtComments.TextChanged += new System.EventHandler(this.txtComments_TextChanged);
             // 
@@ -293,40 +362,42 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTitle.Location = new System.Drawing.Point(88, 12);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(401, 20);
+            this.txtTitle.Size = new System.Drawing.Size(480, 20);
             this.txtTitle.TabIndex = 0;
             this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
-            // objectListView
+            // objectListViewItems
             // 
-            this.objectListView.AllColumns.Add(this.colTitle);
-            this.objectListView.AllColumns.Add(this.colSubtitle);
-            this.objectListView.AllColumns.Add(this.colPubDate);
-            this.objectListView.AllColumns.Add(this.colGenre);
-            this.objectListView.AllColumns.Add(this.colSeries);
-            this.objectListView.AllColumns.Add(this.colSeriesNumber);
-            this.objectListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.objectListViewItems.AllColumns.Add(this.colTitle);
+            this.objectListViewItems.AllColumns.Add(this.colSubtitle);
+            this.objectListViewItems.AllColumns.Add(this.colPubDate);
+            this.objectListViewItems.AllColumns.Add(this.colGenre);
+            this.objectListViewItems.AllColumns.Add(this.colSeries);
+            this.objectListViewItems.AllColumns.Add(this.colSeriesNumber);
+            this.objectListViewItems.AllowColumnReorder = true;
+            this.objectListViewItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.objectListView.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
-            this.objectListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.objectListViewItems.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
+            this.objectListViewItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
             this.colSubtitle,
             this.colPubDate,
             this.colGenre,
             this.colSeries,
             this.colSeriesNumber});
-            this.objectListView.EmptyListMsg = "There are no items in this view.";
-            this.objectListView.FullRowSelect = true;
-            this.objectListView.GridLines = true;
-            this.objectListView.HasCollapsibleGroups = false;
-            this.objectListView.Location = new System.Drawing.Point(0, 0);
-            this.objectListView.Name = "objectListView";
-            this.objectListView.Size = new System.Drawing.Size(562, 263);
-            this.objectListView.TabIndex = 0;
-            this.objectListView.TintSortColumn = true;
-            this.objectListView.UseCompatibleStateImageBehavior = false;
-            this.objectListView.View = System.Windows.Forms.View.Details;
+            this.objectListViewItems.ContextMenuStrip = this.listContextMenu;
+            this.objectListViewItems.EmptyListMsg = "There are no items in this view.";
+            this.objectListViewItems.FullRowSelect = true;
+            this.objectListViewItems.GridLines = true;
+            this.objectListViewItems.HasCollapsibleGroups = false;
+            this.objectListViewItems.Location = new System.Drawing.Point(0, 0);
+            this.objectListViewItems.Name = "objectListViewItems";
+            this.objectListViewItems.Size = new System.Drawing.Size(441, 194);
+            this.objectListViewItems.TabIndex = 0;
+            this.objectListViewItems.TintSortColumn = true;
+            this.objectListViewItems.UseCompatibleStateImageBehavior = false;
+            this.objectListViewItems.View = System.Windows.Forms.View.Details;
             // 
             // colTitle
             // 
@@ -366,8 +437,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 331);
+            this.ClientSize = new System.Drawing.Size(584, 262);
             this.Controls.Add(this.tabControl1);
+            this.MinimumSize = new System.Drawing.Size(600, 300);
             this.Name = "CollectionForm";
             this.Text = "New Collection";
             this.Load += new System.EventHandler(this.CollectionForm_Load);
@@ -375,11 +447,12 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.listContextMenu.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageItems.ResumeLayout(false);
             this.tabPageProperties.ResumeLayout(false);
             this.tabPageProperties.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objectListView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectListViewItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -387,8 +460,8 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView;
-        private BrightIdeasSoftware.ObjectListView objectListView;
+        private System.Windows.Forms.TreeView treeViewItems;
+        private BrightIdeasSoftware.ObjectListView objectListViewItems;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageItems;
         private System.Windows.Forms.TabPage tabPageProperties;
@@ -400,7 +473,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblCreated;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabPage tabLoans;
         private BrightIdeasSoftware.OLVColumn colTitle;
         private System.Windows.Forms.Button btnAddBook;
         private System.Windows.Forms.Button btnDel;
@@ -412,5 +484,14 @@
         private System.Windows.Forms.Button btnAddVideo;
         private System.Windows.Forms.Button btnAddMusic;
         private System.Windows.Forms.Button btnAddGame;
+        private System.Windows.Forms.ContextMenuStrip listContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bookToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem musicToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loanToolStripMenuItem;
     }
 }

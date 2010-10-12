@@ -9,14 +9,14 @@ namespace MediaManager
     {
 
         public string Author;
-        public uint? Edition;
-        public DateTime? FirstPublicationDate;
+        public uint Edition;
+        public DateTime FirstPublicationDate;
 
         public Book()
         {
             Author = string.Empty;
-            Edition = null;
-            FirstPublicationDate = null;
+            Edition = 0;
+            FirstPublicationDate = DateTime.MinValue;
         }
     }
 }

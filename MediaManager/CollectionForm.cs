@@ -34,7 +34,7 @@ namespace MediaManager
 
             columnMap = new Dictionary<string, List<string>>();
 
-            treeView.Nodes.Clear();
+            treeViewItems.Nodes.Clear();
 
             // Populate the left-hand tree view
             foreach(Type mediaType in mediaTypes)
@@ -49,7 +49,7 @@ namespace MediaManager
                     rootNode.Nodes.Add(fieldNode);
                     columnMap[mediaType.Name].Add(fi.Name);
                 }
-                treeView.Nodes.Add(rootNode);
+                treeViewItems.Nodes.Add(rootNode);
             }
 
             collection.OnModified += new Collection.ModifiedEventHandler(collection_OnModified);
@@ -62,31 +62,46 @@ namespace MediaManager
             lblCreated.Text = collection.CreationDate.ToShortDateString() + " " + collection.CreationDate.ToShortTimeString();
             lblModified.Text = collection.ModifiedDate.ToShortDateString() + " " + collection.ModifiedDate.ToShortTimeString();
 
-            objectListView.SetObjects(collection);
+            showFilteredItems();
         }
 
         private void CollectionForm_Load(object sender, EventArgs e)
         {
             this.Text = string.IsNullOrEmpty(collection.Title) ? "New Collection" : collection.Title;
-            objectListView.SetObjects(collection);
+            objectListViewItems.SetObjects(collection);
+            treeViewItems.SelectedNode = treeViewItems.Nodes[treeViewItems.Nodes.Count - 1].Nodes[0];
         }
 
+        Type filterType;
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            objectListView.Columns.Clear();
+            // Remove all existing columns
+            objectListViewItems.Columns.Clear();
 
-            Type filterType = (Type)e.Node.Tag;
+            filterType = (Type)e.Node.Tag;
 
+            // Rebuild the column list to reflect the selected type
             foreach(string field in columnMap[filterType.Name])
             {
-                BrightIdeasSoftware.OLVColumn col = new BrightIdeasSoftware.OLVColumn(field, field);
+                BrightIdeasSoftware.OLVColumn col = new BrightIdeasSoftware.OLVColumn();
                 col.Text = field;
-                col.Width = 100;
+                col.MinimumWidth = 100;
                 col.AspectName = field;
-                objectListView.Columns.Add(col);
+                col.IsEditable = true;
+                col.Name = field + "Column";
+                col.Tag = filterType;
+                objectListViewItems.Columns.Add(col);
+                if (field == e.Node.Text) objectListViewItems.PrimarySortColumn = col;
             }
 
-            objectListView.SetObjects(collection.Select(n=>n.GetType() == filterType));
+            showFilteredItems();
+        }
+
+        private void showFilteredItems()
+        {
+            // Only display items of the selected type
+            if (filterType == typeof(Media)) objectListViewItems.SetObjects(collection);
+            else objectListViewItems.SetObjects(collection.Where(n => n.GetType() == filterType));
         }
 
         private void txtTitle_TextChanged(object sender, EventArgs e)
@@ -101,39 +116,67 @@ namespace MediaManager
 
         private void btnAddBook_Click(object sender, EventArgs e)
         {
-            Media m = new Book();
-            m.Title = "*";
-            collection.Add(m);
+            bookToolStripMenuItem_Click(sender, e);
         }
 
         private void btnAddGame_Click(object sender, EventArgs e)
         {
-            Media m = new Game();
-            m.Title = "*";
-            collection.Add(m);
+            gameToolStripMenuItem_Click(sender, e);
         }
 
         private void btnAddMusic_Click(object sender, EventArgs e)
         {
-            Media m = new Music();
-            m.Title = "*";
-            collection.Add(m);
+            musicToolStripMenuItem_Click(sender, e);
         }
 
         private void btnAddVideo_Click(object sender, EventArgs e)
         {
-            Media m = new Video();
-            m.Title = "*";
-            collection.Add(m);
+            videoToolStripMenuItem_Click(sender, e);
         }
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            // Delete the active row from the collection
-            Media m = (Media)objectListView.SelectedObject;
-            collection.Remove(m);
+            deleteToolStripMenuItem_Click(sender, e);
         }
 
+        private void bookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Media m = new Book();
+            m.Title = "<New Book>";
+            collection.Add(m);
+            showFilteredItems();
+        }
 
+        private void gameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Media m = new Game();
+            m.Title = "<New Game>";
+            collection.Add(m);
+            showFilteredItems();
+        }
+
+        private void musicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Media m = new Music();
+            m.Title = "<New Music>";
+            collection.Add(m);
+            showFilteredItems();
+        }
+
+        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Media m = new Video();
+            m.Title = "<New Video>";
+            collection.Add(m);
+            showFilteredItems();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Delete the active row from the collection
+            Media m = (Media)objectListViewItems.SelectedObject;
+            collection.Remove(m);
+            showFilteredItems();
+        }
     }
 }
