@@ -7,21 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Reflection;
+using BrightIdeasSoftware;
 
 namespace MediaManager
 {
     public partial class CollectionForm : Form
     {
         public Collection collection;
-        string mediaFilter;
-        string fieldFilter;
         Dictionary<string, List<string>> columnMap;
 
         public CollectionForm(Collection collection)
         {
             this.collection = collection;
-            mediaFilter = "*";
-            fieldFilter = "*";
 
             InitializeComponent();
 
@@ -42,13 +39,18 @@ namespace MediaManager
                 TreeNode rootNode = new TreeNode(mediaType.Name);
                 rootNode.Tag = mediaType;
                 columnMap.Add(mediaType.Name, new List<string>());
-                foreach (FieldInfo fi in mediaType.GetFields())
+
+                // Reorder fields so that inherited entries come last
+                List<FieldInfo> fields = new List<FieldInfo>(mediaType.GetFields(BindingFlags.Public | BindingFlags.Instance));
+                
+                foreach (FieldInfo fi in fields)
                 {
                     TreeNode fieldNode = new TreeNode(fi.Name);
                     fieldNode.Tag = mediaType;
                     rootNode.Nodes.Add(fieldNode);
                     columnMap[mediaType.Name].Add(fi.Name);
                 }
+                
                 treeViewItems.Nodes.Add(rootNode);
             }
 
@@ -62,7 +64,7 @@ namespace MediaManager
             lblCreated.Text = collection.CreationDate.ToShortDateString() + " " + collection.CreationDate.ToShortTimeString();
             lblModified.Text = collection.ModifiedDate.ToShortDateString() + " " + collection.ModifiedDate.ToShortTimeString();
 
-            showFilteredItems();
+            RefreshFilteredItems();
         }
 
         private void CollectionForm_Load(object sender, EventArgs e)
@@ -83,7 +85,7 @@ namespace MediaManager
             // Rebuild the column list to reflect the selected type
             foreach(string field in columnMap[filterType.Name])
             {
-                BrightIdeasSoftware.OLVColumn col = new BrightIdeasSoftware.OLVColumn();
+                OLVColumn col = new OLVColumn();
                 col.Text = field;
                 col.MinimumWidth = 100;
                 col.AspectName = field;
@@ -101,10 +103,25 @@ namespace MediaManager
                 if (field == e.Node.Text) objectListViewItems.PrimarySortColumn = col;
             }
 
-            showFilteredItems();
+            // If we are displaying the "All Media" type, add an extra column indicating media type
+            if (filterType == typeof(Media))
+            {
+                OLVColumn mediaTypeCol = new OLVColumn();
+                mediaTypeCol.Text = "Type";
+                mediaTypeCol.MinimumWidth = 100;
+                mediaTypeCol.IsEditable = false;
+                mediaTypeCol.Name = "mediaTypeColumn";
+                mediaTypeCol.Tag = filterType;
+
+                mediaTypeCol.AspectGetter = delegate(object target) { return target.GetType().Name; };
+
+                objectListViewItems.Columns.Add(mediaTypeCol);
+            }
+
+            RefreshFilteredItems();
         }
 
-        private void showFilteredItems()
+        public void RefreshFilteredItems()
         {
             // Only display items of the selected type
             if (filterType == typeof(Media)) objectListViewItems.SetObjects(collection);
@@ -151,7 +168,7 @@ namespace MediaManager
             Media m = new Book();
             m.Title = "<New Book>";
             collection.Add(m);
-            showFilteredItems();
+            RefreshFilteredItems();
         }
 
         private void gameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,7 +176,7 @@ namespace MediaManager
             Media m = new Game();
             m.Title = "<New Game>";
             collection.Add(m);
-            showFilteredItems();
+            RefreshFilteredItems();
         }
 
         private void musicToolStripMenuItem_Click(object sender, EventArgs e)
@@ -167,7 +184,7 @@ namespace MediaManager
             Media m = new Music();
             m.Title = "<New Music>";
             collection.Add(m);
-            showFilteredItems();
+            RefreshFilteredItems();
         }
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,15 +192,30 @@ namespace MediaManager
             Media m = new Video();
             m.Title = "<New Video>";
             collection.Add(m);
-            showFilteredItems();
+            RefreshFilteredItems();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Delete the active row from the collection
-            Media m = (Media)objectListViewItems.SelectedObject;
-            collection.Remove(m);
-            showFilteredItems();
+            foreach (Media item in getSelectedItems()) collection.Remove(item);
+            RefreshFilteredItems();
+        }
+
+        internal List<Media> getSelectedItems()
+        {
+            return new List<Media>(objectListViewItems.SelectedObjects.Cast<Media>());
+        }
+
+        internal void SelectItems()
+        {
+            SelectItems(new List<Media>(collection));
+        }
+
+        internal void SelectItems(List<Media> items)
+        {
+            objectListViewItems.Select();
+            objectListViewItems.SelectedObjects = items;
         }
     }
 }

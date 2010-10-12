@@ -10,13 +10,11 @@ namespace MediaManager
     /// <summary>
     /// A collection of <see cref="Media"/> items
     /// </summary>
-    [Serializable]
     public class Collection : IEnumerable<Media>
     {
         /// <summary>
         /// Collection Title
         /// </summary>
-        [XmlIgnore]
         public string Title
         {
             get { return _title; }
@@ -27,13 +25,11 @@ namespace MediaManager
                 if (OnModified != null) OnModified(this, _modifiedDate);
             }
         }
-        [XmlElement]
         private string _title;
 
         /// <summary>
         /// Collection Comments
         /// </summary>
-        [XmlIgnore]
         public string Comments
         {
             get { return _comments; }
@@ -44,31 +40,26 @@ namespace MediaManager
                 if (OnModified != null) OnModified(this, _modifiedDate);
             }
         }
-        [XmlElement]
         private string _comments;
 
         /// <summary>
         /// The date and time at which the Collection was created
         /// </summary>
-        [XmlIgnore]
         public DateTime CreationDate
         {
             get { return _creationDate; }
             set {}
         }
-        [XmlElement]
         private DateTime _creationDate;
 
         /// <summary>
         /// The date and time at which the Collection was last modified
         /// </summary>
-        [XmlIgnore]
         public DateTime ModifiedDate
         {
             get { return _modifiedDate; }
             set {}
         }
-        [XmlElement]
         private DateTime _modifiedDate;
 
         public delegate void ModifiedEventHandler(object sender, DateTime time);
@@ -108,7 +99,6 @@ namespace MediaManager
                 }
             }
         }
-        [XmlElement]
         private List<Media> _items;
 
 
@@ -188,6 +178,16 @@ namespace MediaManager
         {
             XmlSerializer deserializer = new XmlSerializer(typeof(Collection));
             return (Collection)deserializer.Deserialize(xmlStream);
+        }
+
+        internal void RemoveRange(List<Media> records)
+        {
+            foreach (Media item in records) Remove(item);
+        }
+
+        internal void AddRange(List<Media> records)
+        {
+            foreach (Media item in records) Add(item);
         }
     }
 }

@@ -49,12 +49,6 @@ namespace MediaManager
             collections = new List<CollectionInfo>();
         }
 
-        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PreferencesForm prefs = new PreferencesForm();
-            prefs.ShowDialog(this);
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             // Autoload any collection specified by the user
@@ -71,6 +65,7 @@ namespace MediaManager
             }
         }
 
+        #region File Menu
         private bool loadCollection(string path)
         {
             if (!File.Exists(path))
@@ -227,8 +222,9 @@ namespace MediaManager
         {
             saveToolStripMenuItem_Click(sender, e);
         }
+        #endregion
 
-        #region Window Layout
+        #region Window Menu
         private void cascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.Cascade);
@@ -242,6 +238,99 @@ namespace MediaManager
         private void tileVerticallyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.TileVertical);
+        }
+        #endregion
+
+        #region Edit Menu
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PreferencesForm prefs = new PreferencesForm();
+            prefs.ShowDialog(this);
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ((CollectionForm)ActiveMdiChild).SelectItems();
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Get the selected records
+            CollectionForm activeChild = (CollectionForm)ActiveMdiChild;
+            List<Media> records = activeChild.getSelectedItems();
+
+            // Put the data into the clipboard
+            toClipboard(records);
+
+            // Since this is a cut, remove the selected records
+            activeChild.collection.RemoveRange(records);
+            activeChild.RefreshFilteredItems();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Put the data into the clipboard
+            toClipboard(((CollectionForm)ActiveMdiChild).getSelectedItems());
+        }
+
+        private void toClipboard(List<Media> records)
+        {
+            // Convert the records to XML
+            StringBuilder sb = new StringBuilder();
+            XmlSerializer serializer = new XmlSerializer(records.GetType());
+            serializer.Serialize(new StringWriter(sb), records);
+
+            // Put the XML into the clipboard
+            Clipboard.SetData(DataFormats.Text, sb.ToString());
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Put the records in the clipboard into the active MDI child
+            CollectionForm activeChild = (CollectionForm)ActiveMdiChild;
+            activeChild.collection.AddRange(fromClipboard());
+            activeChild.RefreshFilteredItems();
+        }
+
+        private List<Media> fromClipboard()
+        {
+            // Create a list for the data that _should_ be in the clipboard
+            List<Media> records = new List<Media>();
+
+            // See if the clipboard actually contains any text
+            if (Clipboard.ContainsText(TextDataFormat.Text))
+            {
+                // Convert the XML in the clipboard to a list of Media
+                string xml = (string)Clipboard.GetData(DataFormats.Text);
+                XmlSerializer serializer = new XmlSerializer(records.GetType());
+                try
+                {
+                    records = new List<Media>((List<Media>)serializer.Deserialize(new StringReader(xml)));
+                }
+                catch (Exception)
+                {
+                    // If something went wrong, just use a blank list
+                    records = new List<Media>();
+                }
+            }
+
+            // Return any retreived records
+            return records;
+        }
+
+        private void cutToolStripButton_Click(object sender, EventArgs e)
+        {
+            cutToolStripMenuItem_Click(sender, e);
+        }
+
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            copyToolStripMenuItem_Click(sender, e);
+        }
+
+        private void pasteToolStripButton_Click(object sender, EventArgs e)
+        {
+            pasteToolStripMenuItem_Click(sender, e);
         }
         #endregion
 
