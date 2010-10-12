@@ -8,7 +8,24 @@ namespace MediaManager
     public class Game : Media
     {
         public string Studio;
-        public List<string> Platform;
+        [Flags]
+        public enum Platforms
+        {
+            None,
+            NES,
+            SNES,
+            Gameboy,
+            GameboyAdvance,
+            DS,
+            Wii,
+            PSOne,
+            PSTwo,
+            PSThree,
+            PSP,
+            XBox,
+            XBox360,
+        }
+        public Platforms Platform;
         public string Publisher;
         public uint Players
         {
@@ -20,7 +37,7 @@ namespace MediaManager
         public Game()
         {
             Studio = string.Empty;
-            Platform = new List<string>();
+            Platform = Platforms.None;
             Publisher = string.Empty;
             Players = 1;
         }

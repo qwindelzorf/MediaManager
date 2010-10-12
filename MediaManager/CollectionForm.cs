@@ -90,6 +90,13 @@ namespace MediaManager
                 col.IsEditable = true;
                 col.Name = field + "Column";
                 col.Tag = filterType;
+                if (field == "Genre")
+                {
+                    col.AspectToStringConverter = delegate(object item) 
+                    { return String.Join(", ", (List<string>)item); };
+                    col.AspectPutter = delegate(object target, object content)
+                    { ((Media)target).Genre = new List<string>(((string)content).Replace(" ", string.Empty).Split(',')); };
+                }
                 objectListViewItems.Columns.Add(col);
                 if (field == e.Node.Text) objectListViewItems.PrimarySortColumn = col;
             }

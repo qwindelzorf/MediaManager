@@ -16,7 +16,7 @@ namespace MediaManager
         /// <summary>
         /// Collection Title
         /// </summary>
-        [XmlElement]
+        [XmlIgnore]
         public string Title
         {
             get { return _title; }
@@ -27,12 +27,13 @@ namespace MediaManager
                 if (OnModified != null) OnModified(this, _modifiedDate);
             }
         }
+        [XmlElement]
         private string _title;
 
         /// <summary>
         /// Collection Comments
         /// </summary>
-        [XmlElement]
+        [XmlIgnore]
         public string Comments
         {
             get { return _comments; }
@@ -43,28 +44,31 @@ namespace MediaManager
                 if (OnModified != null) OnModified(this, _modifiedDate);
             }
         }
+        [XmlElement]
         private string _comments;
 
         /// <summary>
         /// The date and time at which the Collection was created
         /// </summary>
-        [XmlElement]
+        [XmlIgnore]
         public DateTime CreationDate
         {
             get { return _creationDate; }
             set {}
         }
+        [XmlElement]
         private DateTime _creationDate;
 
         /// <summary>
         /// The date and time at which the Collection was last modified
         /// </summary>
-        [XmlElement]
+        [XmlIgnore]
         public DateTime ModifiedDate
         {
             get { return _modifiedDate; }
             set {}
         }
+        [XmlElement]
         private DateTime _modifiedDate;
 
         public delegate void ModifiedEventHandler(object sender, DateTime time);
