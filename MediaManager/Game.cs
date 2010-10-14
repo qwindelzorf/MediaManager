@@ -24,6 +24,9 @@ namespace MediaManager
             PSP,
             XBox,
             XBox360,
+            Windows,
+            Linux,
+            Mac,
         }
         public Platforms Platform;
         public string Publisher;

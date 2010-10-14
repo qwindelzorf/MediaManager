@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.IO;
 using System.Collections;
+using LumenWorks.Framework.IO.Csv;
+
 
 namespace MediaManager
 {
@@ -124,6 +126,67 @@ namespace MediaManager
                 loadCollection(ofd.FileName);
             }
 
+        }
+
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Prompt the user for the file to import
+            string extension = "csv";
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = extension;
+            ofd.CheckFileExists = true;
+            ofd.AddExtension = true;
+            ofd.AutoUpgradeEnabled = true;
+            ofd.Multiselect = false;
+            ofd.Title = "Select Default Collection...";
+            ofd.Filter = string.Concat("Media Collections (*." + extension + ")|*." + extension + "|All files (*.*)|*.*");
+            if (ofd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+            if (!File.Exists(ofd.FileName))
+            {
+                MessageBox.Show("Could not find file specified.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Parse the CSV, creating a collection from it
+            int line = 1;
+            try
+            {
+                CollectionInfo info = new CollectionInfo();
+                using (CsvReader csv = new CsvReader(new StreamReader(ofd.FileName), true))
+                {
+                    int fieldCount = csv.FieldCount;
+                    string[] headers = csv.GetFieldHeaders();
+
+                    while (csv.ReadNextRecord())
+                    {
+                        Book b = new Book();
+                        b.Series = csv[0];
+                        b.Title = csv[1];
+                        b.SeriesNumber = uint.Parse(csv[2]);
+                        b.Author = csv[3];
+                        b.Genre = new List<string>(csv[4].Replace(" ", string.Empty).Split(','));
+                        // csv[5] is page count
+                        b.FirstPublicationDate = new DateTime(int.Parse(csv[6]), 1, 1);
+                        b.PublicationDate = new DateTime(int.Parse(csv[7]), 1, 1);
+                        // csv[8] is comments
+
+                        info.Item.Add(b);
+                        line++;
+                    }
+                }
+
+                info.Item.Comments = "Imported from " + ofd.SafeFileName + " on " + DateTime.Now.ToShortDateString() + ".";
+                info.Item.Title = ofd.SafeFileName.Substring(0, ofd.SafeFileName.LastIndexOf("."));
+                collections.Add(info);
+                newCollectionWindow(info.Item);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not parse the file \"" + ofd.FileName + "\".\n" 
+                    + "Error at line " + line + ": \n" + ex.Message
+                    , "Parse Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

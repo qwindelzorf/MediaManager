@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Book.cs" />
+    <Compile Include="MediaTypes\Book.cs" />
     <Compile Include="Collection.cs" />
     <Compile Include="CollectionForm.cs">
       <SubType>Form</SubType>
@@ -61,8 +61,8 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
-    <Compile Include="Media.cs" />
-    <Compile Include="Music.cs" />
+    <Compile Include="MediaTypes\Media.cs" />
+    <Compile Include="MediaTypes\Music.cs" />
     <Compile Include="PreferencesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,7 +70,7 @@
       <DependentUpon>PreferencesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Video.cs" />
+    <Compile Include="MediaTypes\Video.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CollectionForm.resx">
@@ -104,6 +104,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LumenWorks.Framework.IO\LumenWorks.Framework.IO.csproj">
+      <Project>{E3B83D68-C90C-4874-8E5F-DEC8D038BC7C}</Project>
+      <Name>LumenWorks.Framework.IO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ObjectListView\ObjectListView.csproj">
       <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
       <Name>ObjectListView</Name>
