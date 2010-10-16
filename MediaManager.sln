@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaManager", "MediaManager\MediaManager.csproj", "{BD648101-95F7-4539-9FF1-B7BB34CE014D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectListView", "ObjectListView\ObjectListView.csproj", "{18FEDA0C-D147-4286-B39A-01204808106A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LumenWorks.Framework.IO", "LumenWorks.Framework.IO\LumenWorks.Framework.IO.csproj", "{E3B83D68-C90C-4874-8E5F-DEC8D038BC7C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MediaManagerSetup", "MediaManagerSetup\MediaManagerSetup.vdproj", "{592C57EA-5DC4-4734-9455-CA3917AA3BA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,12 @@ Global
 		{E3B83D68-C90C-4874-8E5F-DEC8D038BC7C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E3B83D68-C90C-4874-8E5F-DEC8D038BC7C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E3B83D68-C90C-4874-8E5F-DEC8D038BC7C}.Release|x86.ActiveCfg = Release|Any CPU
+		{592C57EA-5DC4-4734-9455-CA3917AA3BA3}.Debug|Any CPU.ActiveCfg = Debug
+		{592C57EA-5DC4-4734-9455-CA3917AA3BA3}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{592C57EA-5DC4-4734-9455-CA3917AA3BA3}.Debug|x86.ActiveCfg = Debug
+		{592C57EA-5DC4-4734-9455-CA3917AA3BA3}.Release|Any CPU.ActiveCfg = Release
+		{592C57EA-5DC4-4734-9455-CA3917AA3BA3}.Release|Mixed Platforms.ActiveCfg = Release
+		{592C57EA-5DC4-4734-9455-CA3917AA3BA3}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
