@@ -53,16 +53,28 @@ namespace MediaManager
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // Autoload any collection specified by the user
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.defaultCollection))
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length == 2)
             {
-                if (File.Exists(Properties.Settings.Default.defaultCollection))
-                {
-                    loadCollection(Properties.Settings.Default.defaultCollection);
-                }
+                FileInfo doc = new FileInfo(args[1]);
+                if (doc.Exists && doc.Extension == ("." + Properties.Settings.Default.fileExtension))
+                    loadCollection(doc.FullName);
                 else
+                    MessageBox.Show("Could not open file.\n" + args[1], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                // Autoload any collection specified by the user
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.defaultCollection))
                 {
-                    MessageBox.Show("The default collection could not be loaded.  Please verify your preferences.", "Autoload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (File.Exists(Properties.Settings.Default.defaultCollection))
+                    {
+                        loadCollection(Properties.Settings.Default.defaultCollection);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The default collection could not be loaded.  Please verify your preferences.", "Autoload Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
