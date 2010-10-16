@@ -21,13 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_254A0A482AF94514B79D05663C9434EC"
+        "MsmKey" = "8:_4B98636BA898409DB2104F78898BECEF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4B98636BA898409DB2104F78898BECEF"
+        "MsmKey" = "8:_611745943A39481E90063242B0C4F082"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -41,6 +41,12 @@
         {
         "MsmKey" = "8:_A9EBB8D0329BFFAD8E5ACEC9096D440C"
         "OwnerKey" = "8:_004CE2815FEE4D42BD30E515F525CB66"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C06A722C8C08456FBEFC123AD8E53028"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -86,6 +92,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -153,10 +172,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_254A0A482AF94514B79D05663C9434EC"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4B98636BA898409DB2104F78898BECEF"
             {
-            "SourcePath" = "8:..\\MediaManager\\mm.ico"
-            "TargetName" = "8:mm.ico"
+            "SourcePath" = "8:uninstall.bat"
+            "TargetName" = "8:uninstall.bat"
             "Tag" = "8:"
             "Folder" = "8:_A77B050363054589A3A9EE4552492388"
             "Condition" = "8:"
@@ -173,10 +192,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4B98636BA898409DB2104F78898BECEF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_611745943A39481E90063242B0C4F082"
             {
-            "SourcePath" = "8:uninstall.bat"
-            "TargetName" = "8:uninstall.bat"
+            "SourcePath" = "8:..\\MediaManager\\uninstall.ico"
+            "TargetName" = "8:uninstall.ico"
             "Tag" = "8:"
             "Folder" = "8:_A77B050363054589A3A9EE4552492388"
             "Condition" = "8:"
@@ -255,6 +274,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C06A722C8C08456FBEFC123AD8E53028"
+            {
+            "SourcePath" = "8:..\\MediaManager\\mm.ico"
+            "TargetName" = "8:mm.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_A77B050363054589A3A9EE4552492388"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -264,7 +303,7 @@
             "Description" = "8:MediaManager Collection (XML)"
             "Extensions" = "8:xcl"
             "MIME" = "8:"
-            "Icon" = "8:_254A0A482AF94514B79D05663C9434EC"
+            "Icon" = "8:_C06A722C8C08456FBEFC123AD8E53028"
             "IconIndex" = "3:0"
                 "Command"
                 {
@@ -346,7 +385,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MediaManager"
         "ProductCode" = "8:{22CE6059-F6CE-4647-B07C-CDB94B742DFD}"
-        "PackageCode" = "8:{CE7F796A-DD59-4636-AA5D-C2385B8C4F4C}"
+        "PackageCode" = "8:{65F943B8-7EF5-42A0-913B-E75A36827BFF}"
         "UpgradeCode" = "8:{5A9A7F59-4BA2-404F-AA87-72C7FACB710F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -484,14 +523,14 @@
             {
             "Name" = "8:Uninstall MediaManager"
             "Arguments" = "8:"
-            "Description" = "8:"
+            "Description" = "8:Uninstall MediaManager"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_4B98636BA898409DB2104F78898BECEF"
             "Folder" = "8:_A2D90B026DBA405899627C37E3902DEB"
             "WorkingFolder" = "8:_A77B050363054589A3A9EE4552492388"
-            "Icon" = "8:"
+            "Icon" = "8:_611745943A39481E90063242B0C4F082"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7B927A1204B448B7992D919C60D02A2E"
@@ -505,7 +544,7 @@
             "Target" = "8:_004CE2815FEE4D42BD30E515F525CB66"
             "Folder" = "8:_A2D90B026DBA405899627C37E3902DEB"
             "WorkingFolder" = "8:_A77B050363054589A3A9EE4552492388"
-            "Icon" = "8:"
+            "Icon" = "8:_C06A722C8C08456FBEFC123AD8E53028"
             "Feature" = "8:"
             }
         }
