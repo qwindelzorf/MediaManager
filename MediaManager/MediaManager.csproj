@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BD648101-95F7-4539-9FF1-B7BB34CE014D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -60,7 +60,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Game.cs" />
+    <Compile Include="MediaTypes\Game.cs" />
     <Compile Include="MediaTypes\Media.cs" />
     <Compile Include="MediaTypes\Music.cs" />
     <Compile Include="PreferencesForm.cs">

@@ -95,7 +95,7 @@ namespace MediaManager
                 if (field == "Genre")
                 {
                     col.AspectToStringConverter = delegate(object item) 
-                    { return String.Join(", ", (List<string>)item); };
+                    { return String.Join(", ", (string[])item); };
                     col.AspectPutter = delegate(object target, object content)
                     { ((Media)target).Genre = new List<string>(((string)content).Replace(" ", string.Empty).Split(',')); };
                 }
